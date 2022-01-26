@@ -7,15 +7,13 @@ Created on 13 Dec 2021
 
 
 
-from PyQt5              import QtWidgets, QtCore, QtGui
+from PyQt5              import QtWidgets, QtGui
 from PyQt5.QtGui        import QDoubleValidator
-from PyQt5.QtWidgets    import QWidget, QMenu, QAction, QProgressBar, QLineEdit, QLabel, QFileDialog, QTabWidget, QVBoxLayout, QFormLayout, QLineEdit, QCheckBox, QGroupBox, QGridLayout
+from PyQt5.QtWidgets    import QWidget, QAction, QProgressBar, QLineEdit, QLabel, QFileDialog, QTabWidget, QVBoxLayout, QLineEdit, QGroupBox, QGridLayout
 from PyQt5.QtCore       import Qt, QThread, pyqtSignal
-from PyQt5.Qt           import QDial, QSlider, QHBoxLayout, QPushButton, QFont, QMessageBox, QObject, QInputDialog
+from PyQt5.Qt           import QDial, QSlider, QHBoxLayout, QPushButton, QFont, QObject
 
 from application import Application
-from numpy.ma.core import anomalies
-
 
 
 
@@ -82,8 +80,7 @@ class GUI(QtWidgets.QMainWindow):
         and connects them to action handles
         '''
         # the main grid
-        grid = QGridLayout() 
-        
+        grid = QGridLayout()   
         '''
         Geometry settings
         '''
@@ -151,6 +148,9 @@ class GUI(QtWidgets.QMainWindow):
         grid.addWidget(group_box, 0,0)
         grid.setColumnStretch(0, 1)
         
+        '''
+        Simulation settings
+        '''
         hbox = QHBoxLayout()
         vbox2 = QVBoxLayout()
         label = QLabel("Azimuth resolution [m]")
@@ -170,10 +170,6 @@ class GUI(QtWidgets.QMainWindow):
         hbox.addLayout(vbox2) 
         vbox.addLayout(hbox)
         
-        
-        '''
-        Simulation settings
-        '''
         group_box = QGroupBox("Simulation settings")
         vbox = QVBoxLayout()
         # title of slider 1
@@ -197,24 +193,22 @@ class GUI(QtWidgets.QMainWindow):
         hbox.addWidget(label)
         vbox.addLayout(hbox)
         
-        label = QLabel("dB clipping")
-        vbox.addWidget(label)
-        # horizontal box for slider and label
         hbox = QHBoxLayout()
-        slider = QSlider(Qt.Horizontal)
-        slider.setMinimum(9)
-        slider.setMaximum(99)
-        slider.setValue(55)
-        slider.setTickPosition(QSlider.TicksBelow)
-        slider.setTickInterval(9)
-        label = QLabel()
-        label.setMinimumWidth(25)
-        label.setNum(slider.value())
-        slider.valueChanged.connect(label.setNum)
-        slider.valueChanged.connect(self.set_dBcliping)  
-        # add slider and label to vertical layout
-        hbox.addWidget(slider)
+        label = QLabel("dB Min")
         hbox.addWidget(label)
+        label = QLabel("dB Max [m]")
+        hbox.addWidget(label)
+        vbox.addLayout(hbox)
+        
+        hbox = QHBoxLayout()
+        line = QLineEdit()
+        line.setValidator(QDoubleValidator(-100,100,1,self))
+        line.textChanged.connect(self.set_dB_min)
+        hbox.addWidget(line)
+        line = QLineEdit()
+        line.setValidator(QDoubleValidator(-100,100,1,self))
+        line.textChanged.connect(self.set_dB_max)
+        hbox.addWidget(line)
         vbox.addLayout(hbox)
 
         # horizontal box for dial 1 and label
@@ -238,8 +232,7 @@ class GUI(QtWidgets.QMainWindow):
         hbox.addWidget(dial)
         hbox.addLayout(vbox2) 
         vbox.addLayout(hbox)
-             
-        
+   
         # adds coordinate controls to grid
         group_box.setLayout(vbox)  
         grid.addWidget(group_box, 1,0)
@@ -298,9 +291,11 @@ class GUI(QtWidgets.QMainWindow):
         self.pbar.setValue(value)
     
     def new_file(self): 
-        self.update_pbar(1)
-        dir_path = QFileDialog.getOpenFileName(self,"Choose file to open")
+        self.update_pbar(0)
+        dir_path = QFileDialog.getOpenFileName(self,"Choose file to open", 
+         'C:/Users/rhaapaniemi/Desktop/Testing_Folder')
         load_file_path = dir_path[0]
+        self.update_pbar(33)
         self.app.load_contributions(load_file_path)
         self.model_file_label.setText(load_file_path)
         save_file_path = load_file_path.rsplit('/',1)[0]
@@ -335,8 +330,11 @@ class GUI(QtWidgets.QMainWindow):
     def set_trace_level(self, value):
         self.app.set_trace_level(value)
     
-    def set_dBcliping(self, value):
-        self.app.set_dBcliping(value)
+    def set_dB_min(self, value):
+        self.app.set_dB_min(value)
+        
+    def set_dB_max(self, value):
+        self.app.set_dB_max(value)
     
     def set_noise_level(self, value):
         self.app.set_noise_level(value)
