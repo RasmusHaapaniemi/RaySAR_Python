@@ -34,6 +34,9 @@ class Application:
             Intensity       = data[:,3]
             Ref_level       = data[:,4]
             print("Number of data rows %d" % Az_coordinate.size)    
+            
+            print(Ra_coordinate.min())
+            print(Ra_coordinate.max())
                    
             # Remove all data that is out of selected range
             index_select = np.where((Az_coordinate > self.para.az_min)&
@@ -113,7 +116,6 @@ class Application:
         print("Min Max dB10 amplitude")
         print(amplitude_min)
         print(amplitude_max) 
-        sensor_plane = np.flip(sensor_plane, 0)
         
         '''
         create name for image and save it to
