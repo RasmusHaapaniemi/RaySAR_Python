@@ -7,22 +7,34 @@ Created on 13 Dec 2021
 
 
 
-import sys
-from PyQt5.QtWidgets import QApplication
-from gui import GUI
+from application import Application
+
 
 
 
 def main():
         
-    # Use global to prevent crashing on exit
-    global qapp
-    qapp = QApplication(sys.argv)
-    gui = GUI()
-
-    # Start the Qt event loop end exit after it stops
-    sys.exit(qapp.exec_())
+    app = Application()
     
+    
+    
+    # Car settings
+    app.set_azimuth_min(-30)
+    app.set_azimuth_max(30)
+    app.set_azimuth_spacing(0.2)
+    app.set_range_min(100)
+    app.set_range_max(180)
+    app.set_range_spacing(0.2)
+    app.set_dB_min(-30)
+    app.set_dB_max(100)
+    app.set_noise_level(20)
+    app.set_trace_level(3)
+    app.set_save_file("C:/Users/rhaapaniemi/Desktop/Testing_Folder/car")
+    app.set_visual_data(True)
+    
+    
+    app.load_contributions("C:/Users/rhaapaniemi/Desktop/Testing_Folder/car/Contributions.txt")
+    app.compute()
     
 if __name__ == '__main__':
     main()

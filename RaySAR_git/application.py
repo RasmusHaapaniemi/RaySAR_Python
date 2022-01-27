@@ -9,6 +9,7 @@ Created on 20 Jan 2022
 
 import numpy as np
 import imageio as im
+import matplotlib.pyplot as plt
 from contributions_data_class import Contributions_data
 from simulation_parameters_class import Simulation_parameters
 
@@ -22,6 +23,7 @@ class Application:
         self.data = Contributions_data()
         self.para = Simulation_parameters()
         self.save_file_path = ""
+        self.visual_data = False
     
     
     def load_contributions(self, path):
@@ -34,10 +36,26 @@ class Application:
             Intensity       = data[:,3]
             Ref_level       = data[:,4]
             print("Number of data rows %d" % Az_coordinate.size)    
-            
-            print(Ra_coordinate.min())
-            print(Ra_coordinate.max())
-                   
+                       
+            # show data in plots
+            if self.visual_data:
+                max_index = np.argpartition(Intensity, -500)[-500:]
+                plt.scatter(np.take(Az_coordinate, max_index), np.take(Ra_coordinate, max_index), marker='x')
+                plt.ylabel("Range")
+                plt.xlabel("Azimuth")
+                plt.title("500 largest reflection points")
+                plt.show()         
+                plt.hist(Ra_coordinate, 1000)
+                plt.title("Range data distribution")
+                plt.ylabel("Number of data points")
+                plt.xlabel("Range")
+                plt.show()
+                plt.hist(Az_coordinate, 1000)
+                plt.title("Azimuth data distribution")
+                plt.ylabel("Number of data points")
+                plt.xlabel("Azimuth")
+                plt.show()
+                          
             # Remove all data that is out of selected range
             index_select = np.where((Az_coordinate > self.para.az_min)&
                                     (Az_coordinate < self.para.az_max)&
@@ -54,7 +72,7 @@ class Application:
             
             
             
-    def compute(self, progress_value=None):
+    def compute(self):
            
         # length of total coordinate system
         azimuth_len = self.para.az_max - self.para.az_min
@@ -65,13 +83,11 @@ class Application:
         # image matrix
         sensor_plane = np.zeros((range_tic, azimuth_tic), dtype=complex)
         
-        print("Sensor plane pixels")
-        print(range_tic)
-        print(azimuth_tic)
 
         # picture pixel location offsetted from min coordinate values and centered  
         row_pixel = np.true_divide((self.data.ra_coordinate - self.para.ra_min), self.para.ra_spacing) + 0.5
         col_pixel = np.true_divide((self.data.az_coordinate - self.para.az_min), self.para.az_spacing) + 0.5
+        
         
         '''
         Adds amplitude values to correct places in sensor_plane
@@ -103,6 +119,13 @@ class Application:
             sensor_plane = np.log10(sensor_plane)*10 
             sensor_plane[sensor_plane < self.para.dB_min] = self.para.dB_min
             sensor_plane[sensor_plane > self.para.dB_max] = self.para.dB_max
+            
+            if self.visual_data:
+                plt.hist(sensor_plane.ravel(),1000)
+                plt.title("Amplitude distribution")
+                plt.ylabel("Data points")
+                plt.xlabel("10dB")
+                plt.show()
            
         '''
         scale image to gray color of 255 bit
@@ -113,9 +136,6 @@ class Application:
         step_width = 255 / interval
         sensor_plane -= amplitude_min
         sensor_plane = (sensor_plane * step_width).astype(np.uint8)
-        print("Min Max dB10 amplitude")
-        print(amplitude_min)
-        print(amplitude_max) 
         
         '''
         create name for image and save it to
@@ -147,55 +167,59 @@ class Application:
             
     #################### SETTINGS ##########################
     
+    def set_visual_data(self, bool):
+        self.visual_data = bool
+        print(self.visual_data)
+    
     def set_save_file(self, path):
         self.save_file_path = path
     
     def set_azimuth_spacing(self, value):
-        self.para.az_spacing = value
+        self.para.az_spacing = float(value)
         print(self.para.az_spacing)
         
     def set_range_spacing(self, value):
-        self.para.ra_spacing = value
+        self.para.ra_spacing = float(value)
         print(self.para.ra_spacing)
         
     def set_azimuth_min(self, value):
-        self.para.az_min = value
+        self.para.az_min = float(value)
         print(self.para.az_min)
     
     def set_azimuth_max(self, value):
-        self.para.az_min = value
+        self.para.az_max = float(value)
         print(self.para.az_min)
         
     def set_range_min(self, value):
-        self.para.ra_min = value
+        self.para.ra_min = float(value)
         print(self.para.ra_min)
     
     def set_range_max(self, value):
-        self.para.ra_max = value
+        self.para.ra_max = float(value)
         print(self.para.ra_max)
         
     def set_azimuth_res(self, value):
-        self.para.az_res = value
+        self.para.az_res = float(value)
         print(self.para.az_res)
         
     def set_range_res(self, value):
-        self.para.ra_res = value
+        self.para.ra_res = float(value)
         print(self.para.ra_res)
     
     def set_trace_level(self, value):
-        self.para.tr_level = value
+        self.para.tr_level = float(value)
         print(self.para.tr_level)
     
     def set_dB_min(self, value):
-        self.para.dB_min = value
+        self.para.dB_min = float(value)
         print(self.para.dB_min)
         
     def set_dB_max(self, value):
-        self.para.dB_max = value
+        self.para.dB_max = float(value)
         print(self.para.dB_max)
     
     def set_noise_level(self, value):
-        self.para.noise = value
+        self.para.noise = float(value)
         print(self.para.noise)
             
         
