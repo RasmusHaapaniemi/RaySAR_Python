@@ -1,0 +1,326 @@
+# 
+# Wavefront material file
+# Converted by the DEEP Exploration  Deep Exploration 5.5 5.5.3.2642 Release
+# Right Hemisphere, LTD
+# http://www.righthemisphere.com/
+# 
+
+newmtl b737_800_2_t
+Ka 1 1 1
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 18.3792
+map_Kd Factory Livery\\b737_800_2_T.tga
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl b737_800_2_t0
+Ka 1 1 1
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 18.3792
+map_Kd Factory Livery\\b737_800_2_T.tga
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl matte__ffffffff01
+Ka 0.243137 0.243137 0.243137
+Kd 0.243137 0.243137 0.243137
+Ks 0.244039 0.244039 0.244039
+illum 2
+Ns 68.5935
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material__57
+Ka 1 1 1
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 18.3792
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl b737_800_2_t1
+Ka 1 1 1
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 18.3792
+map_Kd Factory Livery\\b737_800_2_T.tga
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl matte__ffffffff010
+Ka 0.243137 0.243137 0.243137
+Kd 0.243137 0.243137 0.243137
+Ks 0.244039 0.244039 0.244039
+illum 2
+Ns 68.5935
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material__68
+Ka 1 1 1
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 18.3792
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl black
+Ka 0.164706 0.164706 0.164706
+Kd 0.164706 0.164706 0.164706
+Ks 0.99 0.99 0.99
+illum 2
+Ns 63.7064
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl black0
+Ka 0.164706 0.164706 0.164706
+Kd 0.164706 0.164706 0.164706
+Ks 0.99 0.99 0.99
+illum 2
+Ns 63.7064
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl a380_01
+Ka 1 1 1
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 21.1121
+map_Kd Factory Livery\\a380_01.tga
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material__46
+Ka 0.164706 0.164706 0.164706
+Kd 0.164706 0.164706 0.164706
+Ks 0.99 0.99 0.99
+illum 2
+Ns 63.7064
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl black1
+Ka 0.164706 0.164706 0.164706
+Kd 0.164706 0.164706 0.164706
+Ks 0.99 0.99 0.99
+illum 2
+Ns 63.7064
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl a380_010
+Ka 1 1 1
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 21.1121
+map_Kd Factory Livery\\a380_01.tga
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl a380_mw
+Ka 0.996078 1 1
+Kd 1 1 1
+Ks 0.972314 0.976157 0.976157
+illum 2
+Ns 119.428
+map_Kd Factory Livery\\A380_mw.tga
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl a380_l_
+Ka 1 1 1
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 21.1121
+map_Kd Factory Livery\\A380_L.tga
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl a380_r
+Ka 1 1 1
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 24.2515
+map_Kd Factory Livery\\A380_R.tga
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl a380_part1
+Ka 1 1 1
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 29.8571
+map_Kd Factory Livery\\A380_part1.tga
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl a380_part2
+Ka 1 1 1
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 25.9921
+map_Kd Factory Livery\\A380_part2.tga
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl a380_part3
+Ka 1 1 1
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 14.9285
+map_Kd Factory Livery\\A380_part3.tga
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material__35
+Ka 0.164706 0.164706 0.164706
+Kd 0.164706 0.164706 0.164706
+Ks 0.99 0.99 0.99
+illum 2
+Ns 63.7064
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 

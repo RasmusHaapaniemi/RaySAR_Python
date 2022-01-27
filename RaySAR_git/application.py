@@ -167,60 +167,47 @@ class Application:
             
     #################### SETTINGS ##########################
     
-    def set_visual_data(self, bool):
-        self.visual_data = bool
-        print(self.visual_data)
+    def set_visual_data(self, value):
+        self.visual_data = value
     
     def set_save_file(self, path):
         self.save_file_path = path
     
     def set_azimuth_spacing(self, value):
         self.para.az_spacing = float(value)
-        print(self.para.az_spacing)
         
     def set_range_spacing(self, value):
         self.para.ra_spacing = float(value)
-        print(self.para.ra_spacing)
         
     def set_azimuth_min(self, value):
         self.para.az_min = float(value)
-        print(self.para.az_min)
     
     def set_azimuth_max(self, value):
         self.para.az_max = float(value)
-        print(self.para.az_min)
         
     def set_range_min(self, value):
         self.para.ra_min = float(value)
-        print(self.para.ra_min)
     
     def set_range_max(self, value):
         self.para.ra_max = float(value)
-        print(self.para.ra_max)
         
     def set_azimuth_res(self, value):
         self.para.az_res = float(value)
-        print(self.para.az_res)
         
     def set_range_res(self, value):
         self.para.ra_res = float(value)
-        print(self.para.ra_res)
     
     def set_trace_level(self, value):
         self.para.tr_level = float(value)
-        print(self.para.tr_level)
     
     def set_dB_min(self, value):
         self.para.dB_min = float(value)
-        print(self.para.dB_min)
         
     def set_dB_max(self, value):
         self.para.dB_max = float(value)
-        print(self.para.dB_max)
     
     def set_noise_level(self, value):
         self.para.noise = float(value)
-        print(self.para.noise)
             
         
         
