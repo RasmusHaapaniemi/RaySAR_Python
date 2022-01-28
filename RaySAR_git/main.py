@@ -35,7 +35,7 @@ def main():
     app.compute()
     
     
-    '''# Airplane settings
+    # Airplane settings
     app.set_azimuth_min(-40)
     app.set_azimuth_max(30)
     app.set_azimuth_spacing(0.2)
@@ -49,7 +49,7 @@ def main():
     app.set_save_file("C:/Users/rhaapaniemi/Desktop/Testing_Folder/Airplane")
     app.set_visual_data(False)
     app.load_contributions("C:/Users/rhaapaniemi/Desktop/Testing_Folder/Airplane/Contributions.txt")
-    app.compute()'''
+    app.compute()
     
     
 if __name__ == '__main__':
