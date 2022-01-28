@@ -10,6 +10,7 @@ Created on 20 Jan 2022
 import numpy as np
 import imageio as im
 import matplotlib.pyplot as plt
+from os import path
 from contributions_data_class import Contributions_data
 from simulation_parameters_class import Simulation_parameters
 
@@ -103,7 +104,7 @@ class Application:
                 angle = temp_angle - cycles*2*np.pi
                 # complex amplitude
                 amplitude = self.data.intensity[i]
-                noise = np.deg2rad(self.para.noise) * np.random.rand()
+                noise = np.deg2rad(self.para.noise) * np.random.uniform(-1, 1)
                 signal = amplitude*np.cos(angle + noise) + 1j*amplitude*np.sin(angle + noise)
                 y = int(row_pixel[i]-1)
                 x = int(col_pixel[i]-1)
@@ -141,13 +142,20 @@ class Application:
         create name for image and save it to
         same folder as contributions data
         '''
-        name = "Tr" + str(self.para.tr_level) + "dBmin" + str(self.para.dB_min) + \
-               "dBmax" + str(self.para.dB_max) + "N" + str(self.para.noise)
-        name_string = ("/%s" % (name)) + ".jpeg"
-        location = self.save_file_path + name_string
-        print("image saved to")
-        print(location)
-        im.imwrite(location, sensor_plane)
+        i = 1
+        while i > 0:
+            name = str(i) + "-Tr" + str(self.para.tr_level) + "dBmin" + str(self.para.dB_min) + \
+                   "dBmax" + str(self.para.dB_max) + "N" + str(self.para.noise)
+            name_string = ("/%s" % (name)) + ".jpeg"
+            location = self.save_file_path + name_string
+            
+            if not path.exists(location):
+                print("image saved to")
+                print(location)
+                im.imwrite(location, sensor_plane)
+                i = -1
+            else:
+                i += 1
         
         
         
