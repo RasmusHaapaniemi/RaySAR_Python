@@ -35,7 +35,7 @@ def main():
     app.compute()'''
     
     
-    # Airplane settings
+    # Airplane settings for /rotation/6Contributions.txt
     app.set_azimuth_min(-40)
     app.set_azimuth_max(30)
     app.set_azimuth_spacing(0.2)
