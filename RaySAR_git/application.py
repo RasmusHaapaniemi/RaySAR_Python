@@ -114,8 +114,41 @@ class Application:
         '''
         dB 10 scaling snesor_plane image to wanted range
         removing 0 amplitudes in load won't affect to final image!
+        Adds star like shape due to sync overflow.
         '''
+        # Take only length of complex pixel values
         sensor_plane = np.absolute(sensor_plane)
+        # Holds old pixel values for math function
+        sensor_plane_temp = sensor_plane.copy()
+        # maximum distance of star effect in pixels
+        EFFECT_AREA = 100
+        EFFECT_DECAY = 0.7
+        x = np.arange(0,EFFECT_AREA,1)
+
+        sensor_height = len(sensor_plane)
+        sensor_width = len(sensor_plane[0])   
+        for j in range(0, sensor_height, 1):
+            for i in range(0, sensor_width, 1):
+             
+                x0 = i - EFFECT_AREA
+                x1 = i + EFFECT_AREA
+                if x0 < 0:
+                    x0 = 0
+                if x1 > sensor_width:
+                    x1 = sensor_width             
+                y0 = j - EFFECT_AREA
+                y1 = j + EFFECT_AREA
+                if y0 < 0:
+                    y0 = 0
+                if y1 > sensor_height:
+                    y1 = sensor_height
+                    
+                values = sensor_plane_temp[j,i]/np.power((x/EFFECT_DECAY+1),2)   
+                sensor_plane[j,i:x1:1] += values[:x1-i]
+                sensor_plane[j:y1:1,i] += values[:y1-j]         
+                sensor_plane[j,x0:i:1] += np.flip(values[:i-x0])
+                sensor_plane[y0:j:1,i] += np.flip(values[:j-y0])
+     
         with np.errstate(divide='ignore'):
             sensor_plane = np.log10(sensor_plane)*10 
             sensor_plane[sensor_plane < self.para.dB_min] = self.para.dB_min
@@ -125,8 +158,9 @@ class Application:
                 plt.hist(sensor_plane.ravel(),1000)
                 plt.title("Amplitude distribution")
                 plt.ylabel("Data points")
-                plt.xlabel("10dB")
-                plt.show()
+                plt.xlabel("10dB10")
+                plt.show()    
+        
            
         '''
         scale image to gray color of 255 bit

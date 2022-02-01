@@ -30,7 +30,7 @@ def main():
     app.set_noise_level(20)
     app.set_trace_level(4)
     app.set_save_file("C:/Users/rhaapaniemi/Desktop/Testing_Folder/car")
-    app.set_visual_data(False)
+    app.set_visual_data(True)
     app.load_contributions("C:/Users/rhaapaniemi/Desktop/Testing_Folder/car/Contributions.txt")
     app.compute()'''
     
@@ -42,14 +42,30 @@ def main():
     app.set_range_min(100)
     app.set_range_max(180)
     app.set_range_spacing(0.2)
-    app.set_dB_min(-30)
-    app.set_dB_max(100)
+    app.set_dB_min(-20)
+    app.set_dB_max(-3)
     app.set_noise_level(20)
     app.set_trace_level(4)
     app.set_save_file("C:/Users/rhaapaniemi/Desktop/Testing_Folder/Airplane/rotation")
-    app.set_visual_data(False)
+    app.set_visual_data(True)
     app.load_contributions("C:/Users/rhaapaniemi/Desktop/Testing_Folder/Airplane/rotation/6Contributions.txt")
     app.compute()
+    
+    '''# T62
+    app.set_azimuth_min(-20)
+    app.set_azimuth_max(20)
+    app.set_azimuth_spacing(0.18)
+    app.set_range_min(120)
+    app.set_range_max(170)
+    app.set_range_spacing(0.1833)
+    app.set_dB_min(-15)
+    app.set_dB_max(-12)
+    app.set_noise_level(20)
+    app.set_trace_level(4)
+    app.set_save_file("C:/Users/rhaapaniemi/Desktop/Testing_Folder/t-62")
+    app.set_visual_data(True)
+    app.load_contributions("C:/Users/rhaapaniemi/Desktop/Testing_Folder/t-62/Contributions.txt")
+    app.compute()'''
     
     
 if __name__ == '__main__':
