@@ -15,17 +15,19 @@ class Simulation_parameters():
     '''
     
     def __init__(self):
-        self.az_spacing = 0.2
-        self.ra_spacing = 0.2
-        self.az_min     = -30
-        self.az_max     =  30
-        self.ra_min     = 100
-        self.ra_max     = 180
-        self.az_res     = 1
-        self.ra_res     = 1
-        self.noise      = 20
-        self.tr_level   = 3
-        self.dB_min     = -30
-        self.dB_max     = 100
+        self.az_spacing     = 0.2
+        self.ra_spacing     = 0.2
+        self.az_min         = -30
+        self.az_max         =  30
+        self.ra_min         = 100
+        self.ra_max         = 180
+        self.az_res         = 1
+        self.ra_res         = 1
+        self.noise          = 20
+        self.tr_level       = 3
+        self.dB_min         = -30
+        self.dB_max         = 100
+        self.response_th    = 0.9
+        self.response_decay = 0.7
     
     

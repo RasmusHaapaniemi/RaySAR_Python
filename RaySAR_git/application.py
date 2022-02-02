@@ -117,37 +117,38 @@ class Application:
         Adds star like shape due to sync overflow.
         '''
         # Take only length of complex pixel values
-        sensor_plane = np.absolute(sensor_plane)
+        sensor_plane = np.absolute(sensor_plane)     
         # Holds old pixel values for math function
         sensor_plane_temp = sensor_plane.copy()
         # maximum distance of star effect in pixels
         EFFECT_AREA = 100
-        EFFECT_DECAY = 0.7
         x = np.arange(0,EFFECT_AREA,1)
+        thereshold = sensor_plane_temp.max()*self.para.response_th
 
         sensor_height = len(sensor_plane)
         sensor_width = len(sensor_plane[0])   
         for j in range(0, sensor_height, 1):
             for i in range(0, sensor_width, 1):
              
-                x0 = i - EFFECT_AREA
-                x1 = i + EFFECT_AREA
-                if x0 < 0:
-                    x0 = 0
-                if x1 > sensor_width:
-                    x1 = sensor_width             
-                y0 = j - EFFECT_AREA
-                y1 = j + EFFECT_AREA
-                if y0 < 0:
-                    y0 = 0
-                if y1 > sensor_height:
-                    y1 = sensor_height
-                    
-                values = sensor_plane_temp[j,i]/np.power((x/EFFECT_DECAY+1),2)   
-                sensor_plane[j,i:x1:1] += values[:x1-i]
-                sensor_plane[j:y1:1,i] += values[:y1-j]         
-                sensor_plane[j,x0:i:1] += np.flip(values[:i-x0])
-                sensor_plane[y0:j:1,i] += np.flip(values[:j-y0])
+                if sensor_plane_temp[j,i] > thereshold:
+                    x0 = i - EFFECT_AREA
+                    x1 = i + EFFECT_AREA
+                    if x0 < 0:
+                        x0 = 0
+                    if x1 > sensor_width:
+                        x1 = sensor_width             
+                    y0 = j - EFFECT_AREA
+                    y1 = j + EFFECT_AREA
+                    if y0 < 0:
+                        y0 = 0
+                    if y1 > sensor_height:
+                        y1 = sensor_height
+                        
+                    values = sensor_plane_temp[j,i]/np.power((x/self.para.response_decay+1),2)   
+                    sensor_plane[j,i:x1:1] += values[:x1-i]
+                    sensor_plane[j:y1:1,i] += values[:y1-j]         
+                    sensor_plane[j,x0:i:1] += np.flip(values[:i-x0])
+                    sensor_plane[y0:j:1,i] += np.flip(values[:j-y0])
      
         with np.errstate(divide='ignore'):
             sensor_plane = np.log10(sensor_plane)*10 
@@ -250,6 +251,10 @@ class Application:
     
     def set_noise_level(self, value):
         self.para.noise = float(value)
+
+    def set_system_response_th(self, value):
+        self.para.response_th = value
             
-        
+    def set_system_response_decay(self,value):
+        self.para.response_decay = value
         
