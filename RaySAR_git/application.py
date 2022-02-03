@@ -40,12 +40,12 @@ class Application:
                        
             # show data in plots
             if self.visual_data:
-                max_index = np.argpartition(Intensity, -500)[-500:]
+                '''max_index = np.argpartition(Intensity, -500)[-500:]
                 plt.scatter(np.take(Az_coordinate, max_index), np.take(Ra_coordinate, max_index), marker='x')
                 plt.ylabel("Range")
                 plt.xlabel("Azimuth")
                 plt.title("500 largest reflection points")
-                plt.show()         
+                plt.show()'''     
                 plt.hist(Ra_coordinate, 1000)
                 plt.title("Range data distribution")
                 plt.ylabel("Number of data points")
@@ -156,12 +156,10 @@ class Application:
             sensor_plane[sensor_plane > self.para.dB_max] = self.para.dB_max
             
             if self.visual_data:
-                plt.hist(sensor_plane.ravel(),1000)
-                plt.title("Amplitude distribution")
-                plt.ylabel("Data points")
-                plt.xlabel("10dB10")
-                plt.show()    
-        
+                plt.hist(sensor_plane.ravel(), 1000)
+                plt.title('Histogram for 10dB10')
+                plt.show()
+                  
            
         '''
         scale image to gray color of 255 bit
@@ -172,6 +170,11 @@ class Application:
         step_width = 255 / interval
         sensor_plane -= amplitude_min
         sensor_plane = (sensor_plane * step_width).astype(np.uint8)
+        
+        if self.visual_data:
+            plt.hist(sensor_plane.ravel(),256,[0,256])
+            plt.title('Histogram for gray scale picture')
+            plt.show()
         
         '''
         create name for image and save it to

@@ -84,33 +84,33 @@ def main():
     app.load_contributions("C:/Users/rhaapaniemi/Desktop/Testing_Folder/Airplane/airport_2/Contributions.txt")
     app.compute()'''
     
-    '''# T62
+    # T62
     app.set_azimuth_min(-20)
     app.set_azimuth_max(20)
-    app.set_azimuth_spacing(0.18)
-    app.set_range_min(120)
-    app.set_range_max(170)
-    app.set_range_spacing(0.1833)
-    app.set_dB_min(-16)
-    app.set_dB_max(-10)
-    app.set_noise_level(40)
+    app.set_azimuth_spacing(0.2)#(0.18)
+    app.set_range_min(130)
+    app.set_range_max(160)
+    app.set_range_spacing(0.2)#(0.1833)
+    app.set_dB_min(-35)
+    app.set_dB_max(-15.5)
+    app.set_noise_level(0)
     app.set_trace_level(5)
     app.set_save_file("C:/Users/rhaapaniemi/Desktop/Testing_Folder/t-62")
     app.set_visual_data(True)
-    app.set_system_response_th(0.9)
-    app.set_system_response_decay(1.0)
+    app.set_system_response_th(0.47)
+    app.set_system_response_decay(0.18)
     app.load_contributions("C:/Users/rhaapaniemi/Desktop/Testing_Folder/t-62/Contributions.txt")
-    app.compute()'''
+    app.compute()
     
-    # Ground scene
-    app.set_azimuth_min(-50)
-    app.set_azimuth_max(50)
-    app.set_azimuth_spacing(0.2)
-    app.set_range_min(100)
-    app.set_range_max(200)
-    app.set_range_spacing(0.2)
-    app.set_dB_min(-25)
-    app.set_dB_max(-17)
+    '''# Ground scene
+    app.set_azimuth_min(-3)
+    app.set_azimuth_max(3)
+    app.set_azimuth_spacing(0.02)
+    app.set_range_min(380)
+    app.set_range_max(386)
+    app.set_range_spacing(0.054347)
+    app.set_dB_min(-10)
+    app.set_dB_max(10)
     app.set_noise_level(30)
     app.set_trace_level(5)
     app.set_save_file("C:/Users/rhaapaniemi/Desktop/Testing_Folder/Ground")
@@ -118,7 +118,7 @@ def main():
     app.set_system_response_th(1.1)
     app.set_system_response_decay(0.7)
     app.load_contributions("C:/Users/rhaapaniemi/Desktop/Testing_Folder/Ground/Contributions.txt")
-    app.compute()
+    app.compute()'''
     
     
 if __name__ == '__main__':
