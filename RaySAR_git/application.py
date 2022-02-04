@@ -10,6 +10,7 @@ Created on 20 Jan 2022
 import numpy as np
 import imageio as im
 import matplotlib.pyplot as plt
+import cv2
 from os import path
 from contributions_data_class import Contributions_data
 from simulation_parameters_class import Simulation_parameters
@@ -36,7 +37,9 @@ class Application:
             Ra_coordinate   = data[:,1]
             Intensity       = data[:,3]
             Ref_level       = data[:,4]
-            print("Number of data rows %d" % Az_coordinate.size)    
+            print("Number of data rows %d" % Az_coordinate.size)   
+            
+            #Ra_coordinate = Ra_coordinate * np.sin(np.radians(75)) ground range... 
                        
             # show data in plots
             if self.visual_data:
@@ -74,7 +77,6 @@ class Application:
             
             
     def compute(self):
-           
         # length of total coordinate system
         azimuth_len = self.para.az_max - self.para.az_min
         range_len = self.para.ra_max - self.para.ra_min
@@ -83,6 +85,10 @@ class Application:
         range_tic = round(range_len / self.para.ra_spacing)
         # image matrix
         sensor_plane = np.zeros((range_tic, azimuth_tic), dtype=complex)
+        
+        print("Sensor plane size")
+        print(len(sensor_plane))
+        print(len(sensor_plane[0]))
         
 
         # picture pixel location offsetted from min coordinate values and centered  
@@ -175,15 +181,20 @@ class Application:
             plt.hist(sensor_plane.ravel(),256,[0,256])
             plt.title('Histogram for gray scale picture')
             plt.show()
-        
+                  
+            
         '''
         create name for image and save it to
         same folder as contributions data
         '''
+        '''sensor_plane = cv2.resize(sensor_plane, (172, 173))
+        print("Image resized to")
+        print("172x173")    '''  
+        
         i = 1
         while i > 0:
-            name = str(i) + "-Tr" + str(self.para.tr_level) + "dBmin" + str(self.para.dB_min) + \
-                   "dBmax" + str(self.para.dB_max) + "N" + str(self.para.noise)
+            name = str(i) + "dBmin" + str(self.para.dB_min) + \
+                    "dBmax" + str(self.para.dB_max) + "N" + str(self.para.noise)
             name_string = ("/%s" % (name)) + ".jpeg"
             location = self.save_file_path + name_string
             
@@ -194,6 +205,7 @@ class Application:
                 i = -1
             else:
                 i += 1
+
         
         
         
