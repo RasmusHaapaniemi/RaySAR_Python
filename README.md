@@ -21,7 +21,8 @@ Tell name of wanted parametrs
 JSON example:
 
 [
-	{	"fileName": "T62-20",
+	{
+		"fileName": "T62-20",
 	
 		"azimuthMin":-17,
 		
