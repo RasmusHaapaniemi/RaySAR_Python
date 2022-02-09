@@ -22,7 +22,7 @@ JSON example:
 
 [
 	{	"fileName": "T62-20",
-		"azimuthMin":-17,                   
+		"azimuthMin":-17,
 		"azimuthMax":17,
 		"azimuthSpacing":0.3,
 		"rangeMin":275,
@@ -43,6 +43,7 @@ JSON example:
 ]
 
 ============ PARA FILE INFO ==============
+
 Filename is name of parameter set that is given as arg
 
 az min is left limit of created image
@@ -72,6 +73,7 @@ path is relative path within main git folder to wanted data folder.
 
 
 =========== QUICK START ============
+
 Models are usually in middle, but range can change from scene to scene.
 Visual data plots data-coordinate images that can be used to locate object.
 
