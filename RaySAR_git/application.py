@@ -11,7 +11,8 @@ import numpy as np
 import imageio as im
 import matplotlib.pyplot as plt
 import cv2
-from os import path
+import os
+import sys
 from contributions_data_class import Contributions_data
 from simulation_parameters_class import Simulation_parameters
 
@@ -24,12 +25,29 @@ class Application:
     def __init__(self):
         self.data = Contributions_data()
         self.para = Simulation_parameters()
-        self.save_file_path = ""
-        self.visual_data = False
+        self.folder_path = ""
+        self.visual_data = 0
+        
+        
+    '''
+    Iterate all Contribution.txt files
+    in path folder
+    '''
+    def run(self):   
+        for file in os.listdir(self.folder_path):   
+            # Select only data files from folder
+            if file.endswith(".txt"):
+                print("\n" + file)
+                file_path = self.folder_path + "/" + file
+                self.load_contributions(file_path)
+                self.compute(file_path )
     
     
-    def load_contributions(self, path):
-               
+    '''
+    Load and select 
+    data in region
+    '''
+    def load_contributions(self, path):           
         try:       
             data = np.genfromtxt(path, delimiter=" ")  
             # Data from contrubutions.txt
@@ -38,17 +56,9 @@ class Application:
             Intensity       = data[:,3]
             Ref_level       = data[:,4]
             print("Number of data rows %d" % Az_coordinate.size)   
-            
-            #Ra_coordinate = Ra_coordinate * np.sin(np.radians(75)) ground range... 
                        
             # show data in plots
-            if self.visual_data:
-                '''max_index = np.argpartition(Intensity, -500)[-500:]
-                plt.scatter(np.take(Az_coordinate, max_index), np.take(Ra_coordinate, max_index), marker='x')
-                plt.ylabel("Range")
-                plt.xlabel("Azimuth")
-                plt.title("500 largest reflection points")
-                plt.show()'''     
+            if self.visual_data:  
                 plt.hist(Ra_coordinate, 1000)
                 plt.title("Range data distribution")
                 plt.ylabel("Number of data points")
@@ -76,7 +86,7 @@ class Application:
             
             
             
-    def compute(self):
+    def compute(self, path):
         # length of total coordinate system
         azimuth_len = self.para.az_max - self.para.az_min
         range_len = self.para.ra_max - self.para.ra_min
@@ -89,8 +99,7 @@ class Application:
         print("Sensor plane size")
         print(len(sensor_plane))
         print(len(sensor_plane[0]))
-        
-
+    
         # picture pixel location offsetted from min coordinate values and centered  
         row_pixel = np.true_divide((self.data.ra_coordinate - self.para.ra_min), self.para.ra_spacing) + 0.5
         col_pixel = np.true_divide((self.data.az_coordinate - self.para.az_min), self.para.az_spacing) + 0.5
@@ -119,8 +128,7 @@ class Application:
             
         '''
         dB 10 scaling snesor_plane image to wanted range
-        removing 0 amplitudes in load won't affect to final image!
-        Adds star like shape due to sync overflow.
+        Adds star like shape due to impulse response overflow.
         '''
         # Take only length of complex pixel values
         sensor_plane = np.absolute(sensor_plane)     
@@ -158,6 +166,8 @@ class Application:
      
         with np.errstate(divide='ignore'):
             sensor_plane = np.log10(sensor_plane)*10 
+            self.para.dB_min += self.para.dB_min * self.para.dB_rng *  np.random.uniform(-1, 1)
+            self.para.dB_max += self.para.dB_max * self.para.dB_rng *  np.random.uniform(-1, 1)
             sensor_plane[sensor_plane < self.para.dB_min] = self.para.dB_min
             sensor_plane[sensor_plane > self.para.dB_max] = self.para.dB_max
             
@@ -181,55 +191,43 @@ class Application:
             plt.hist(sensor_plane.ravel(),256,[0,256])
             plt.title('Histogram for gray scale picture')
             plt.show()
-                  
-            
+             
+             
+        '''
+        scale image to wanted true pixel size
+        '''
+        sensor_plane = cv2.resize(sensor_plane, (self.rescale_size, self.rescale_size))
+        print("Image resized to")
+        print(self.rescale_size)  
+        sensor_plane = cv2.flip(sensor_plane, 0)
+        print("Image flipped vertically")
+        
+        
         '''
         create name for image and save it to
         same folder as contributions data
         '''
-        '''sensor_plane = cv2.resize(sensor_plane, (172, 173))
-        print("Image resized to")
-        print("172x173")    '''  
-        
-        i = 1
-        while i > 0:
-            name = str(i) + "dBmin" + str(self.para.dB_min) + \
-                    "dBmax" + str(self.para.dB_max) + "N" + str(self.para.noise)
-            name_string = ("/%s" % (name)) + ".jpeg"
-            location = self.save_file_path + name_string
-            
-            if not path.exists(location):
-                print("image saved to")
-                print(location)
-                im.imwrite(location, sensor_plane)
-                i = -1
-            else:
-                i += 1
+        path = path.rsplit("/", 1)
+        destination = path[0]
+        index = path[1].split("_")
 
-        
-        
-        
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+        name = "/SAR_" + index[0] + "_dbmin" + str(self.para.dB_min) + \
+                "_dBmax" + str(self.para.dB_max) + ".jpeg"
+                
+        destination += name            
+        print("Image saved to")
+        print(destination)
+        im.imwrite(destination, sensor_plane)
+    
             
     #################### SETTINGS ##########################
     
     def set_visual_data(self, value):
         self.visual_data = value
     
-    def set_save_file(self, path):
-        self.save_file_path = path
+    def set_folder_path(self, folder_path):
+        path = os.path.join(sys.path[0], folder_path)
+        self.folder_path = path
     
     def set_azimuth_spacing(self, value):
         self.para.az_spacing = float(value)
@@ -263,6 +261,9 @@ class Application:
         
     def set_dB_max(self, value):
         self.para.dB_max = float(value)
+        
+    def set_dB_rng(self, value):
+        self.para.dB_rng = value
     
     def set_noise_level(self, value):
         self.para.noise = float(value)
@@ -272,4 +273,7 @@ class Application:
             
     def set_system_response_decay(self,value):
         self.para.response_decay = value
+        
+    def set_sar_image_rescale(self, value):
+        self.rescale_size = value
         

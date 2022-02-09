@@ -27,7 +27,10 @@ class Simulation_parameters():
         self.tr_level       = 3
         self.dB_min         = -30
         self.dB_max         = 100
+        self.dB_rng         = 0.0
         self.response_th    = 0.9
         self.response_decay = 0.7
+        self.rescale_size   = 172
+        self.upside_down    = 0
     
     

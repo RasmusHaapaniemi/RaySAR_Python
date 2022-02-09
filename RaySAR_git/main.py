@@ -7,14 +7,49 @@ Created on 13 Dec 2021
 
 
 
+import sys
+import json
+import pprint
 from application import Application
 
 
-
-
-def main():
+def main(argv):
         
     app = Application()
+    
+    if len(argv) != 3:
+        print("\nArgiments are not correct!!!\nExiting program...\n\n")
+  
+    with open(argv[1]) as json_file:
+        data = json.load(json_file)
+        
+    for settings in data:
+        if settings['fileName'] ==  argv[2]:
+            print("\nParameters from:\n" + settings['fileName'] + " selected\n")
+            pprint.pprint(settings)
+            
+            app.set_azimuth_min(settings['azimuthMin'])
+            app.set_azimuth_max(settings['azimuthMax'])
+            app.set_azimuth_spacing(settings['azimuthSpacing'])
+            app.set_range_min(settings['rangeMin'])
+            app.set_range_max(settings['rangeMax'])
+            app.set_range_spacing(settings['rangeSpacing'])
+            app.set_dB_min(settings['dBmin'])
+            app.set_dB_max(settings['dBmax'])
+            app.set_dB_rng(settings['dBrng'])
+            app.set_noise_level(settings['noise'])
+            app.set_trace_level(settings['traceLevel'])
+            app.set_system_response_th(settings['responseTh'])
+            app.set_system_response_decay(settings['responseDecey'])
+            app.set_visual_data(settings['visualData'])
+            app.set_sar_image_rescale(settings['imageRescale'])
+            app.set_folder_path(settings['path'])
+            app.run()
+         
+    print("\n\nAll selected data is processed\nExiting program...")
+    
+    
+    
     
     
     
@@ -84,25 +119,61 @@ def main():
     app.load_contributions("C:/Users/rhaapaniemi/Desktop/Testing_Folder/Airplane/airport_2/Contributions.txt")
     app.compute()'''
     
-    '''# T62
+    '''# T62 15
     app.set_azimuth_min(-17)
     app.set_azimuth_max(17)
-    app.set_azimuth_spacing(0.35)#(0.24)
-    app.set_range_min(368)
-    app.set_range_max(402)
-    app.set_range_spacing(0.35)#(0.4354)
+    app.set_azimuth_spacing(0.30)
+    app.set_range_min(366)
+    app.set_range_max(400)
+    app.set_range_spacing(0.30)
     app.set_dB_min(-36.0)
-    app.set_dB_max(-15.3)
+    app.set_dB_max(-15.0)
+    app.set_dB_rng(0.01)
     app.set_noise_level(0)
     app.set_trace_level(5)
-    app.set_save_file("C:/Users/rhaapaniemi/Desktop/Testing_Folder/t-62/15-rotation")
     app.set_visual_data(False)
-    app.set_system_response_th(0.47)#(0.47)
-    app.set_system_response_decay(0.08)
-    app.load_contributions("C:/Users/rhaapaniemi/Desktop/Testing_Folder/t-62/15-rotation/12Contributions.txt")
-    app.compute()'''
+    app.set_system_response_th(0.54)
+    app.set_system_response_decay(0.03)
+    app.set_folder_path("C:/Users/rhaapaniemi/Desktop/Testing_Folder/t-62/Training/15")
+    app.run()'''
     
-    # Ground scene
+    '''# T62 17
+    app.set_azimuth_min(-21)
+    app.set_azimuth_max(13)
+    app.set_azimuth_spacing(0.30)
+    app.set_range_min(327)
+    app.set_range_max(361)
+    app.set_range_spacing(0.30)
+    app.set_dB_min(-36.0)
+    app.set_dB_max(-15.0)
+    app.set_dB_rng(0.01)
+    app.set_noise_level(0)
+    app.set_trace_level(5)
+    app.set_visual_data(False)
+    app.set_system_response_th(0.57)
+    app.set_system_response_decay(0.03)
+    app.set_folder_path("C:/Users/rhaapaniemi/Desktop/Testing_Folder/t-62/Training/17")
+    app.run()'''
+    
+    '''# T62 20
+    app.set_azimuth_min(-17)
+    app.set_azimuth_max(17)
+    app.set_azimuth_spacing(0.30)
+    app.set_range_min(275)
+    app.set_range_max(309)
+    app.set_range_spacing(0.305)
+    app.set_dB_min(-36.0)
+    app.set_dB_max(-15.0)
+    app.set_dB_rng(0.01)
+    app.set_noise_level(0)
+    app.set_trace_level(5)
+    app.set_visual_data(False)
+    app.set_system_response_th(0.54)
+    app.set_system_response_decay(0.03)
+    app.set_folder_path("C:/Users/rhaapaniemi/Desktop/Testing_Folder/t-62/Training/20")
+    app.run()'''
+    
+    '''# Ground scene
     app.set_azimuth_min(-42)
     app.set_azimuth_max(42)
     app.set_azimuth_spacing(0.2)
@@ -118,7 +189,7 @@ def main():
     app.set_system_response_th(1.1)
     app.set_system_response_decay(0.7)
     app.load_contributions("C:/Users/rhaapaniemi/Desktop/Testing_Folder/Ground/Contributions.txt")
-    app.compute()
+    app.compute()'''
     
     '''# steps
     app.set_azimuth_min(-15)
@@ -158,7 +229,7 @@ def main():
     
     
 if __name__ == '__main__':
-    main()
+    main(sys.argv)
     
     
     
