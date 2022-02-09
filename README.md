@@ -42,7 +42,7 @@ JSON example:
 	}
 ]
 
-====================================== PARA FILE INFO ========================================
+============ PARA FILE INFO ==============
 Filename is name of parameter set that is given as arg
 
 az min is left limit of created image
@@ -71,7 +71,7 @@ upside down flips image vertically
 path is relative path within main git folder to wanted data folder.
 
 
-================================ QUICK START ===================================
+=========== QUICK START ============
 Models are usually in middle, but range can change from scene to scene.
 Visual data plots data-coordinate images that can be used to locate object.
 
