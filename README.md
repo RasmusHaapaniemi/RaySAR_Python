@@ -23,39 +23,22 @@ JSON example:
 [
 		{
 		"fileName": "T62-20",
-	
-		"azimuthMin":-17,
-		
-		"azimuthMax":17,
-		
-		"azimuthSpacing":0.3,
-		
-		"rangeMin":275,
-		
-		"rangeMax":309,
-		
-		"rangeSpacing":0.305,
-		
-		"dBmin":-36.0,
-		
-		"dBmax":-15.0,
-		
-		"dBrng":0.01,
-		
-		"noise":0,
-		
-		"traceLevel":5,
-		
-		"responseTh":0.54,
-		
-		"responseDecey":0.03,
-		
-		"visualData":1,
-		
-		"imageRescale":172,
-		
-		"upsideDown": 1
-		
+		"azimuthMin":-17,		
+		"azimuthMax":17,	
+		"azimuthSpacing":0.3,		
+		"rangeMin":275,		
+		"rangeMax":309,		
+		"rangeSpacing":0.305,		
+		"dBmin":-36.0,		
+		"dBmax":-15.0,		
+		"dBrng":0.01,		
+		"noise":0,		
+		"traceLevel":5,		
+		"responseTh":0.54,		
+		"responseDecey":0.03,		
+		"visualData":1,		
+		"imageRescale":172,		
+		"upsideDown": 1	
 		"path": "models/t-62/Training/20"
 		}
 ]
