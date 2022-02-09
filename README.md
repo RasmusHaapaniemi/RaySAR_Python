@@ -21,7 +21,7 @@ Tell name of wanted parametrs
 JSON example:
 
 [
-	{
+		{
 		"fileName": "T62-20",
 	
 		"azimuthMin":-17,
@@ -57,7 +57,7 @@ JSON example:
 		"upsideDown": 1
 		
 		"path": "models/t-62/Training/20"
-	}
+		}
 ]
 
 ============ PARA FILE INFO ==============
