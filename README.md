@@ -83,8 +83,7 @@ Visual data plots data-coordinate images that can be used to locate object.
 Pixel spacing changes resolution. Smaller is higher. Changin this may produce aliasing
 that is depended on used resolution in the POV-Ray. 
 Good values that don't produce aliasing are:
-2 * az spacing = POV-Ray az spacing 
-tan(90-incicent) * ra spacing = POV-Ray ra spacing 
+2 * az spacing = POV-Ray az spacing and tan(90-incicent) * ra spacing = POV-Ray ra spacing 
 
 dB limits affect the color scaling of the image. 
 Visual data plots dB and 8-bit histogram, that can be used as help
