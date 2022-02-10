@@ -10,38 +10,18 @@ imageio
 matplotlib
 cv2
 
+============ TERMINAL USAGE =============
 Terminal usage with current folder structure:
 Set current direcotry to main git folder.
+Add parameters to para.json file in the folder,
+that is automaticly opened when runned.
 Run main.py with python3
-Pass parameters file
 Tell name of wanted parametrs
-"py main.py para.json T62-20"
+"py main.py T62-17"
+"py main.py CAR"
+"py main.py PLANE"
 
 
-JSON example:
-
-[
-		{
-		"fileName": "T62-20",
-		"azimuthMin":-17,		
-		"azimuthMax":17,	
-		"azimuthSpacing":0.3,		
-		"rangeMin":275,		
-		"rangeMax":309,		
-		"rangeSpacing":0.305,		
-		"dBmin":-36.0,		
-		"dBmax":-15.0,		
-		"dBrng":0.01,		
-		"noise":0,		
-		"traceLevel":5,		
-		"responseTh":0.54,		
-		"responseDecey":0.03,		
-		"visualData":1,		
-		"imageRescale":172,		
-		"upsideDown": 1	
-		"path": "models/t-62/Training/20"
-		}
-]
 
 ============ PARA FILE INFO ==============
 
@@ -94,6 +74,6 @@ Th limits the number of points that get the effect as percent value from global 
 Decay affects to decreasing phase of the function. Smaller is faster.
 
 Path is reltive path to data folder inside of the main git folder.
-Application integrates all .txt files (Conributions) in that folder 
+Application iterates all .txt files (Conributions) in that folder 
 and saves them to same location.
 
