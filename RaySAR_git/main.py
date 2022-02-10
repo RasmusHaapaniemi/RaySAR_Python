@@ -17,14 +17,14 @@ def main(argv):
         
     app = Application()
     
-    if len(argv) != 3:
+    if len(argv) != 2:
         print("\nArgiments are not correct!!!\nExiting program...\n\n")
   
-    with open(argv[1]) as json_file:
+    with open('para.json') as json_file:
         data = json.load(json_file)
         
     for settings in data:
-        if settings['fileName'] ==  argv[2]:
+        if settings['fileName'] ==  argv[1]:
             print("\nParameters from:\n" + settings['fileName'] + " selected\n")
             pprint.pprint(settings)
             
