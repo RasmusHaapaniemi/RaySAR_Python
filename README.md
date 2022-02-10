@@ -11,6 +11,7 @@ matplotlib
 cv2
 
 ============ TERMINAL USAGE =============
+
 Terminal usage with current folder structure:
 Set current direcotry to main git folder.
 Add parameters to para.json file in the folder,
