@@ -1,26 +1,45 @@
 # RaySAR_Python
 
-Used libraries:
+=========== USED LIBRARIES =============
+
 os
+
 sys
+
 json
+
 pprint
+
 numpy
+
 imageio
+
 matplotlib
+
 cv2
+
 
 ============ TERMINAL USAGE =============
 
 Terminal usage with current folder structure:
+
 Set current direcotry to main git folder.
+
 Add parameters to para.json file in the folder,
+
 that is automaticly opened when runned.
+
 Run main.py with python3
+
 Tell name of wanted parametrs
+
 "py main.py T62-17"
+
 "py main.py CAR"
+
 "py main.py PLANE"
+
+
 
 
 
@@ -52,6 +71,8 @@ image rescale changes output images true pixel size
 upside down flips image vertically
 
 path is relative path within main git folder to wanted data folder.
+
+
 
 
 =========== QUICK START ============
