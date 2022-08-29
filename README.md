@@ -1,5 +1,21 @@
 # RaySAR_Python
 
+'''
+Refereces:
+
+Original RaySAR was created by Stefan Auer 
+and you may read his PhD thesis and check the code here: 
+https://github.com/StefanJAuer/RaySAR/releases/tag/1.2
+The reposity includes original MATLAB program, documentation,
+and modifyed POV-Ray rendering tool.
+
+This modification of the RaySAR for machine learning purposes
+was conducted with cooperation with ICEYE Oy and Aalto univeristy.
+You may read more detailed project describtion here:
+https://www.rasmus-haapaniemi.com/portfolio/atr
+and also see my attatched masters thesis for full documentation.
+'''
+
 =========== USED LIBRARIES =============
 
 os
